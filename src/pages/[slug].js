@@ -2,7 +2,8 @@ import { MDXRemote } from "next-mdx-remote";
 import Head from 'next/head';
 import { getFileBySlug, getFiles } from "../../lib/mdx";
 import Header from "../components/Header";
-import styles from '../styles/Home.module.css'
+import Image from "next/image";
+import styles from '../styles/Home.module.css';
 
 
 export default function Post({ source, frontmatter }) {
@@ -37,7 +38,7 @@ export default function Post({ source, frontmatter }) {
             <div className={styles.container}>
                 <Header />
                 <main className={styles.articles}>
-                    <img className={styles.img} src={frontmatter.img} />
+                    <Image className={styles.img} src={frontmatter.img} alt={frontmatter.alt} width={600} height={600}/>
                     <MDXRemote {...source} />
                 </main>
             </div>
@@ -63,8 +64,6 @@ export async function getStaticPaths() {
             slug: post.replace(/\.mdx/, ""),
         },
     }));
-
-    console.log(paths);
 
     return {
         paths,
